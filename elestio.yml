@@ -1,6 +1,27 @@
 config:
-  runTime: "nodejs18"
-  buildCommand: "npm install && npm run build"
-  startCommand: "docker-compose up -d"
-  healthCheckURL: "/"
-  httpPort: 80
+  runTime: "docker"
+  version: "1.0"
+  ports:
+    - "80:80"
+  volumes:
+    - "./:/app"
+
+scripts:
+  preInstall: |
+    docker-compose down --remove-orphans
+  postInstall: |
+    docker-compose up -d --build
+
+lifeCycle:
+  preStart: |
+    docker-compose build
+  start: |
+    docker-compose up -d
+  postStart: |
+    sleep 5
+  stop: |
+    docker-compose down
+  
+webUI:
+  - url: "http://[CI_CD_DOMAIN]"
+    label: "Web App"
