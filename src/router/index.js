@@ -50,12 +50,25 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const { isSignedIn } = useAuth()
   
-  if (to.meta.requiresAuth && !isSignedIn) {
-    // Redirect to home if trying to access protected route
-    next('/')
-  } else {
-    next()
+  // Check if the route requires authentication
+  if (to.meta.requiresAuth) {
+    // Wait for the auth state to be determined
+    if (isSignedIn.value === undefined) {
+      // Auth state not yet determined, wait briefly and check again
+      await new Promise(resolve => setTimeout(resolve, 100))
+    }
+    
+    if (!isSignedIn.value) {
+      // User is not signed in, redirect to home
+      next({ 
+        path: '/',
+        query: { redirect: to.fullPath }  // Store the attempted URL for later
+      })
+      return
+    }
   }
+  
+  next()
 })
 
 export default router
