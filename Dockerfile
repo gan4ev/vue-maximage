@@ -20,6 +20,11 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Copy custom nginx config
+RUN echo 'worker_processes auto;' > /etc/nginx/nginx.conf \
+    && echo 'events { worker_connections 1024; }' >> /etc/nginx/nginx.conf \
+    && echo 'http { include /etc/nginx/mime.types; default_type application/octet-stream; sendfile on; keepalive_timeout 65; include /etc/nginx/conf.d/*.conf; }' >> /etc/nginx/nginx.conf
+
 # Expose the port NGINX will use
 EXPOSE 80
 
