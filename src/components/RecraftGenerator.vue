@@ -128,6 +128,7 @@ const currentGenerationId = ref(null)
 // Style options
 const styleOptions = ref([
   { value: 'any', label: 'Any Style' },
+  { value: 'realistic_image', label: 'Realistic' },
   { value: 'realistic_image/b_and_w', label: 'Realistic - Black & White' },
   { value: 'realistic_image/hard_flash', label: 'Realistic - Hard Flash' },
   { value: 'realistic_image/hdr', label: 'Realistic - HDR' },
@@ -138,6 +139,7 @@ const styleOptions = ref([
   { value: 'digital_illustration/pixel_art', label: 'Digital - Pixel Art' },
   { value: 'digital_illustration/hand_drawn', label: 'Digital - Hand Drawn' },
   { value: 'digital_illustration/grain', label: 'Digital - Grain' },
+  { value: 'digital_illustration', label: 'Digital Ilustraion' },
   { value: 'digital_illustration/infantile_sketch', label: 'Digital - Infantile Sketch' },
   { value: 'digital_illustration/2d_art_poster', label: 'Digital - 2D Art Poster' },
   { value: 'digital_illustration/handmade_3d', label: 'Digital - Handmade 3D' },
