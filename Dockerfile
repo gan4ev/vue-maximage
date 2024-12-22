@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18-alpine AS builder
+FROM node:20 AS builder
 
 # Set working directory
 WORKDIR /app
@@ -13,20 +13,23 @@ RUN npm install
 # Copy project files
 COPY . .
 
-# Build the project (this will create the dist directory)
+# Build the project
 RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
+# Set working directory
+WORKDIR /usr/share/nginx/html
+
 # Remove default nginx static assets
-RUN rm -rf /usr/share/nginx/html/*
+RUN rm -rf ./*
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy only the built files from dist
-COPY --from=builder /app/dist/ /usr/share/nginx/html/
+# Copy built files from dist directory
+COPY --from=builder /app/dist/ .
 
 # Set proper permissions
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
