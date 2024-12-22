@@ -19,10 +19,6 @@ services:
       timeout: 10s
       retries: 3
     user: nginx
-    volumes:
-      - /var/run/nginx.pid:/var/run/nginx.pid
-      - /var/cache/nginx:/var/cache/nginx
-      - /var/log/nginx:/var/log/nginx
 
 networks:
   app-network:

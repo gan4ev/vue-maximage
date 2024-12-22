@@ -19,6 +19,9 @@ RUN npm run build
 # Production stage
 FROM nginx:alpine
 
+# Create required directories
+RUN mkdir -p /var/cache/nginx /var/run /var/log/nginx /tmp
+
 # Set working directory
 WORKDIR /usr/share/nginx/html
 
@@ -37,8 +40,8 @@ RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
     chown -R nginx:nginx /etc/nginx/conf.d && \
-    touch /var/run/nginx.pid && \
-    chown -R nginx:nginx /var/run/nginx.pid
+    chown -R nginx:nginx /var/run && \
+    chown -R nginx:nginx /tmp
 
 # Switch to non-root user
 USER nginx
@@ -46,5 +49,5 @@ USER nginx
 # Expose port 3000
 EXPOSE 3000
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start nginx with custom pid path
+CMD ["nginx", "-g", "daemon off; pid /tmp/nginx.pid;"]
