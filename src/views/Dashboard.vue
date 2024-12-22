@@ -14,8 +14,11 @@
           <div v-if="currentModel === 'ideogram'">
             <IdeogramGenerator />
           </div>
+
+          <div v-else-if="currentModel === 'recraft'">
+            <RecraftGenerator />
+          </div>
           
-          <!-- Image Gallery -->
           <div v-else-if="currentModel === 'gallery'" class="pb-8">
             <!-- Loading State -->
             <div v-if="loading" class="text-center py-8">
@@ -151,6 +154,7 @@ import { useAuth } from '@clerk/vue'
 import MainNavigation from '../components/MainNavigation.vue'
 import LeftMenu from '../components/LeftMenu.vue'
 import IdeogramGenerator from '../components/IdeogramGenerator.vue'
+import RecraftGenerator from '../components/RecraftGenerator.vue'
 
 const { isSignedIn, user: clerkUser } = useAuth()
 const supabase = useSupabase()
@@ -179,7 +183,7 @@ const loadImages = async () => {
   
   try {
     const { data, error: fetchError } = await supabase
-      .from('generated_images')
+      .from('images')
       .select('*')
       .eq('clerk_user_id', clerkUser.value.id)
       .order('created_at', { ascending: false })
