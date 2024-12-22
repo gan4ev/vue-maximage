@@ -13,7 +13,7 @@ RUN npm install
 # Copy project files
 COPY . .
 
-# Build the project
+# Build the project (this will create the dist directory)
 RUN npm run build
 
 # Production stage
@@ -25,8 +25,8 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy built files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy only the built files from dist
+COPY --from=builder /app/dist/ /usr/share/nginx/html/
 
 # Set proper permissions
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
