@@ -6,22 +6,17 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy source files and build the app
+# Copy source files
 COPY . .
 
-# Set build-time environment variables
-ARG VITE_SUPABASE_URL
-ARG VITE_SUPABASE_ANON_KEY
-ARG VITE_CLERK_PUBLISHABLE_KEY
-ARG VITE_CLERK_SECRET_KEY
-ARG VITE_FAL_AI_KEY
+# Create .env file with build arguments
+RUN echo "VITE_SUPABASE_URL=https://amrzaswumuizsnbybjdj.supabase.co" > .env && \
+    echo "VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtcnphc3d1bXVpenNuYnliamRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2NTk5NjIsImV4cCI6MjA1MDIzNTk2Mn0.nDEIP-PNTEZ4nvcjs5inZMb1kW_tj5C57kJ5ySgLJv8" >> .env && \
+    echo "VITE_CLERK_PUBLISHABLE_KEY=pk_test_ZW5nYWdpbmctc2xvdGgtNzIuY2xlcmsuYWNjb3VudHMuZGV2JA" >> .env && \
+    echo "VITE_CLERK_SECRET_KEY=sk_test_siKKjvgAvvH68x9RejWnNjOwgUgzhiyCGl5OwTiyL1" >> .env && \
+    echo "VITE_FAL_AI_KEY=c0991d00-3d5a-4a93-b6df-14cfe6675950:39b9dbe51b3d5a0fc57578e6b31529a0" >> .env
 
-ENV VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
-ENV VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
-ENV VITE_CLERK_PUBLISHABLE_KEY=${VITE_CLERK_PUBLISHABLE_KEY}
-ENV VITE_CLERK_SECRET_KEY=${VITE_CLERK_SECRET_KEY}
-ENV VITE_FAL_AI_KEY=${VITE_FAL_AI_KEY}
-
+# Build the app
 RUN npm run build
 
 # Stage 2: Serve with NGINX
