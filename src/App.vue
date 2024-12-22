@@ -16,6 +16,10 @@
                    class="text-white hover:text-gray-300 transition-colors duration-200">
             {{ item.name }}
           </RouterLink>
+          
+          <!-- Sign In/Sign Out Button -->
+          <SignInButton v-if="!isSignedIn" mode="modal" />
+          <SignOutButton v-else />
         </div>
       </div>
     </nav>
@@ -27,6 +31,9 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { SignInButton, SignOutButton, useAuth } from '@clerk/vue'
+
+const { isSignedIn } = useAuth()
 
 const menuItems = [
   { name: 'Home', href: '/' },

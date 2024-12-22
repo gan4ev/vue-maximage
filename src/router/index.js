@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUser } from '@clerk/vue'
+import { useAuth } from '@clerk/vue'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Dashboard from '../views/Dashboard.vue'
@@ -24,14 +24,16 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  const { isSignedIn } = useUser()
+// Navigation guard for authentication
+router.beforeEach(async (to, from, next) => {
+  const { isSignedIn } = useAuth()
   
-  if (to.meta.requiresAuth && !isSignedIn.value) {
+  if (to.meta.requiresAuth && !isSignedIn) {
+    // Redirect to home if trying to access protected route
     next('/')
   } else {
     next()
