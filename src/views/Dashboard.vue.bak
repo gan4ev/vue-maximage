@@ -1,0 +1,281 @@
+<template>
+  <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow">
+      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div class="flex h-[calc(100vh-12rem)]">
+        <!-- Left Menu -->
+        <div class="w-64">
+          <LeftMenu @modelSelected="handleModelChange" />
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1">
+          <Suspense>
+            <IdeogramGenerator v-if="currentModel === 'ideogram'" />
+            <template #fallback>
+              <div class="flex items-center justify-center h-full">
+                <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+              </div>
+            </template>
+          </Suspense>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import LeftMenu from '../components/LeftMenu.vue'
+import IdeogramGenerator from '../components/IdeogramGenerator.vue'
+
+const currentModel = ref('ideogram')
+
+const handleModelChange = (modelId) => {
+  currentModel.value = modelId
+  if (modelId !== 'ideogram') {
+    alert(`${modelId.charAt(0).toUpperCase() + modelId.slice(1)} component coming soon!`)
+  }
+}
+
+// Rest of the code remains the same
+const { user } = useUser()
+const imagePrompt = ref('')
+const isGenerating = ref(false)
+const generatedImage = ref(null)
+const generationStatus = ref('')
+const generationProgress = ref(0)
+const savedImages = ref([])
+
+// Tab Management
+const tabs = [
+  { id: 'ideogram', name: 'Ideogram' },
+  { id: 'flux', name: 'Flux' },
+  { id: 'lora', name: 'LoRA' }
+]
+const currentTab = ref('ideogram')
+
+// Model selections
+const selectedModel = ref('sdxl')
+const selectedStyle = ref('anime')
+const selectedLora = ref('pokemon')
+const outputFormat = ref('1:1')
+
+const getImageDimensions = () => {
+  switch (outputFormat.value) {
+    case '1:1':
+      return { width: 1024, height: 1024 }
+    case '9:16':
+      return { width: 576, height: 1024 }
+    case '16:9':
+      return { width: 1024, height: 576 }
+    default:
+      return { width: 1024, height: 1024 }
+  }
+}
+
+const getPlaceholderText = () => {
+  switch (currentTab.value) {
+    case 'ideogram':
+      return 'Describe your image idea in detail...'
+    case 'flux':
+      return 'Describe your image for the selected style...'
+    case 'lora':
+      return `Describe your image for the ${selectedLora.value} style...`
+    default:
+      return 'Enter your image description...'
+  }
+}
+
+const currentGenerationId = ref(null)
+
+const generateImage = async () => {
+  if (!imagePrompt.value) return
+  
+  try {
+    currentGenerationId.value = null
+    generatedImage.value = null
+    
+    // Initial generation request
+    const response = await fetch('https://queue.fal.run/fal-ai/ideogram/v2', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Key ${import.meta.env.VITE_FAL_AI_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        prompt: imagePrompt.value
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Generation failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Generation response:', data);
+    currentGenerationId.value = data.request_id;
+    
+  } catch (error) {
+    console.error('Error starting generation:', error);
+    alert('Error: ' + error.message);
+  }
+}
+
+const checkGenerationStatus = async () => {
+  if (!currentGenerationId.value) return;
+  
+  try {
+    const response = await fetch(`https://queue.fal.run/fal-ai/ideogram/requests/${currentGenerationId.value}/status`, {
+      headers: {
+        'Authorization': `Key ${import.meta.env.VITE_FAL_AI_KEY}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Status check failed: ${response.status}`);
+    }
+
+    const status = await response.json();
+    console.log('Status check:', status);
+
+    if (status.status === 'COMPLETED') {
+      // Get the result
+      const resultResponse = await fetch(`https://queue.fal.run/fal-ai/ideogram/requests/${currentGenerationId.value}`, {
+        headers: {
+          'Authorization': `Key ${import.meta.env.VITE_FAL_AI_KEY}`
+        }
+      });
+
+      if (!resultResponse.ok) {
+        throw new Error(`Failed to get result: ${resultResponse.status}`);
+      }
+
+      const result = await resultResponse.json();
+      console.log('Result:', result);
+      
+      // Get image URL from the images array
+      if (result.images && result.images.length > 0 && result.images[0].url) {
+        generatedImage.value = result.images[0].url;
+        currentGenerationId.value = null; // Clear ID after successful fetch
+      } else {
+        throw new Error('No image URL in response');
+      }
+    }
+  } catch (error) {
+    console.error('Error checking status:', error);
+  }
+}
+
+watch(currentGenerationId, (newId) => {
+  if (newId) {
+    // Start polling when we have an ID
+    const interval = setInterval(async () => {
+      if (!currentGenerationId.value) {
+        clearInterval(interval);
+        return;
+      }
+      await checkGenerationStatus();
+    }, 1000);
+
+    // Clear interval after 2 minutes max
+    setTimeout(() => {
+      clearInterval(interval);
+      if (currentGenerationId.value) {
+        currentGenerationId.value = null;
+        console.log('Generation timed out');
+      }
+    }, 120000);
+  }
+});
+
+const saveImage = async () => {
+  if (!generatedImage.value) return
+  
+  try {
+    const { data, error } = await supabase
+      .from('images')
+      .insert([
+        {
+          user_id: user.value.id,
+          url: generatedImage.value,
+          prompt: imagePrompt.value,
+          type: currentTab.value
+        }
+      ])
+    
+    if (error) throw error
+    
+    loadSavedImages()
+    generatedImage.value = null
+    imagePrompt.value = ''
+  } catch (error) {
+    console.error('Error saving image:', error)
+  }
+}
+
+const downloadImage = async () => {
+  if (!generatedImage.value) return;
+  
+  try {
+    // Fetch the image
+    const response = await fetch(generatedImage.value);
+    const blob = await response.blob();
+    
+    // Create download link
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `generated-image-${Date.now()}.png`;
+    document.body.appendChild(a);
+    a.click();
+    
+    // Cleanup
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  } catch (error) {
+    console.error('Error downloading image:', error);
+    alert('Error downloading image: ' + error.message);
+  }
+}
+
+const loadSavedImages = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('images')
+      .select('*')
+      .eq('user_id', user.value.id)
+      .order('created_at', { ascending: false })
+    
+    if (error) throw error
+    savedImages.value = data
+  } catch (error) {
+    console.error('Error loading saved images:', error)
+  }
+}
+
+const deleteImage = async (imageId) => {
+  try {
+    const { error } = await supabase
+      .from('images')
+      .delete()
+      .eq('id', imageId)
+    
+    if (error) throw error
+    loadSavedImages()
+  } catch (error) {
+    console.error('Error deleting image:', error)
+  }
+}
+
+onMounted(() => {
+  loadSavedImages()
+})
+</script>
