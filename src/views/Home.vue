@@ -1,136 +1,79 @@
 <template>
-  <div class="min-h-screen bg-[#0D0D0F]">
+  <div class="h-screen bg-[#0D0D0F] flex flex-col overflow-hidden">
     <MainNavigation />
-    <main class="pt-16">
+    <main class="flex-1 flex items-center">
       <!-- Hero Section -->
-      <div class="relative isolate">
-        <!-- Gradient Effects -->
-        <div class="absolute inset-x-0 top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-          <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
-        </div>
-        
-        <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
-          <div class="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
-            <h1 class="mt-10 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              {{ $t('home.hero.title') }}
-              <span class="block mt-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                AI Magic
-              </span>
-            </h1>
-            <p class="mt-6 text-lg leading-8 text-gray-300">
-              {{ $t('home.hero.subtitle') }}
-            </p>
-            <div class="mt-10 flex items-center gap-x-6">
-              <RouterLink 
-                to="/dashboard"
-                class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30"
-              >
-                <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                <span class="relative flex items-center">
-                  {{ $t('home.hero.tryNow') }}
-                  <Icon icon="heroicons:sparkles" class="ml-2 h-5 w-5" />
-                </span>
-              </RouterLink>
-              <RouterLink 
-                to="/features"
-                class="group text-lg font-semibold leading-6 text-white hover:text-purple-400 transition-colors duration-200"
-              >
-                <span class="flex items-center">
-                  {{ $t('home.hero.learnMore') }}
-                  <Icon icon="heroicons:arrow-right" class="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
-                </span>
-              </RouterLink>
-            </div>
-          </div>
-          <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mt-0 lg:mr-0 lg:max-w-none lg:flex-none xl:ml-32">
-            <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-              <div class="relative aspect-square w-[36rem] rounded-xl bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 p-2 border border-white/10">
-                <!-- Floating Elements -->
-                <div class="absolute -top-4 -left-4 bg-black/50 backdrop-blur-md rounded-full px-4 py-2 text-sm text-white border border-white/10 flex items-center">
-                  <Icon icon="heroicons:sparkles" class="mr-2 h-4 w-4 text-purple-400" />
-                  AI Generated
-                </div>
-                
-                <div class="absolute -bottom-4 -right-4 bg-black/50 backdrop-blur-md rounded-full px-4 py-2 text-sm text-white border border-white/10 flex items-center">
-                  <Icon icon="heroicons:camera" class="mr-2 h-4 w-4 text-purple-400" />
-                  4K Resolution
-                </div>
-
-                <!-- Image -->
-                <img 
-                  :src="HeroBg" 
-                  alt="AI Generated Art"
-                  class="w-full h-full object-cover rounded-lg transform hover:scale-[1.02] transition-transform duration-500" 
-                />
-
-                <!-- Floating Stats -->
-                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/70 backdrop-blur-lg rounded-2xl p-6 border border-white/10 w-64">
-                  <div class="text-center">
-                    <h3 class="text-white font-semibold mb-2">AI Generation Stats</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                      <div>
-                        <div class="text-purple-400 text-2xl font-bold">500ms</div>
-                        <div class="text-gray-400 text-sm">Generation Time</div>
-                      </div>
-                      <div>
-                        <div class="text-purple-400 text-2xl font-bold">99%</div>
-                        <div class="text-gray-400 text-sm">Accuracy</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom Gradient -->
-        <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-          <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"></div>
-        </div>
-      </div>
-
-      <!-- Features Preview -->
-      <div class="mx-auto max-w-7xl px-6 pb-24 sm:pb-32">
-        <div class="mx-auto max-w-2xl lg:text-center">
-          <h2 class="text-base font-semibold leading-7 text-purple-400">Powerful Features</h2>
-          <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Everything you need to create stunning AI art
+      <div class="mx-auto max-w-7xl px-6 w-full grid grid-cols-2 gap-12 relative">
+        <!-- Left Content -->
+        <div class="flex flex-col justify-center relative z-50">
+          <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-slide-in">
+            {{ $t('home.hero.title') }}
+            <span class="block mt-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
+              AI Magic
+            </span>
+          </h1>
+          <p class="mt-6 text-lg leading-8 text-gray-300 animate-slide-in-delay">
+            {{ $t('home.hero.subtitle') }}
           </p>
+          <div class="mt-10 flex items-center gap-x-6 animate-slide-in-delay-2">
+            <RouterLink 
+              to="/dashboard"
+              class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30"
+            >
+              <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+              <span class="relative flex items-center">
+                {{ $t('home.hero.tryNow') }}
+                <Icon icon="heroicons:sparkles" class="ml-2 h-5 w-5" />
+              </span>
+            </RouterLink>
+            <RouterLink 
+              to="/features"
+              class="group text-lg font-semibold leading-6 text-white hover:text-purple-400 transition-colors duration-200"
+            >
+              <span class="flex items-center">
+                {{ $t('home.hero.learnMore') }}
+                <Icon icon="heroicons:arrow-right" class="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+              </span>
+            </RouterLink>
+          </div>
         </div>
 
-        <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-            <div class="group flex flex-col relative overflow-hidden rounded-2xl bg-white/5 p-8 border border-white/10 transition-colors duration-300 hover:bg-white/10">
-              <dt class="flex items-center gap-x-3 text-xl font-semibold leading-7 text-white">
-                <Icon icon="heroicons:cpu-chip" class="h-7 w-7 text-purple-400" />
-                Advanced AI Models
-              </dt>
-              <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-300">
-                <p class="flex-auto">State-of-the-art AI models trained on diverse artistic styles.</p>
-              </dd>
+        <!-- Right Image Showcase -->
+        <div class="relative flex items-end justify-center pb-20 z-10">
+          <!-- Floating Images -->
+          <div class="image-showcase">
+            <div class="showcase-item item-1">
+              <img 
+                src="https://img.freepik.com/free-photo/beautiful-mountains-landscape_23-2151151094.jpg?t=st=1734887683~exp=1734891283~hmac=94eb17605a05272d362f1fc9c94b035c3065b4afb40745041bc0cacc0969929c&w=1480" 
+                alt="AI Landscape" 
+                class="rounded-2xl shadow-2xl"
+              />
+              <div class="label">Landscape</div>
             </div>
+            <div class="showcase-item item-2">
+              <img 
+                src="https://img.freepik.com/free-photo/3d-floral-bouquet-white-background-generative-ai_191095-2123.jpg" 
+                alt="AI Art" 
+                class="rounded-2xl shadow-2xl"
+              />
+              <div class="label">3D Art</div>
+            </div>
+            <div class="showcase-item item-3">
+              <img 
+                src="https://img.freepik.com/free-photo/school-playground-anime-style_23-2151125224.jpg" 
+                alt="AI Anime" 
+                class="rounded-2xl shadow-2xl"
+              />
+              <div class="label">Anime Style</div>
+            </div>
+          </div>
 
-            <div class="group flex flex-col relative overflow-hidden rounded-2xl bg-white/5 p-8 border border-white/10 transition-colors duration-300 hover:bg-white/10">
-              <dt class="flex items-center gap-x-3 text-xl font-semibold leading-7 text-white">
-                <Icon icon="heroicons:bolt" class="h-7 w-7 text-purple-400" />
-                Lightning Fast
-              </dt>
-              <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-300">
-                <p class="flex-auto">Generate high-quality images in milliseconds.</p>
-              </dd>
-            </div>
-
-            <div class="group flex flex-col relative overflow-hidden rounded-2xl bg-white/5 p-8 border border-white/10 transition-colors duration-300 hover:bg-white/10">
-              <dt class="flex items-center gap-x-3 text-xl font-semibold leading-7 text-white">
-                <Icon icon="heroicons:cursor-arrow-rays" class="h-7 w-7 text-purple-400" />
-                Easy to Use
-              </dt>
-              <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-300">
-                <p class="flex-auto">Intuitive interface designed for all skill levels.</p>
-              </dd>
-            </div>
-          </dl>
+          <!-- Decorative Elements -->
+          <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 right-0 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+            <div class="absolute bottom-0 left-0 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-20 right-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+          </div>
         </div>
       </div>
     </main>
@@ -141,43 +84,173 @@
 import MainNavigation from '../components/MainNavigation.vue'
 import { Icon } from '@iconify/vue'
 import { useI18n } from 'vue-i18n'
-import HeroBg from '../assets/hero-bg.jpg'
 import { useHead } from '@vueuse/head'
 
 const { t } = useI18n()
 
-// SEO configuration
 useHead({
   title: t('home.hero.title'),
   meta: [
     {
       name: 'description',
-      content: t('home.hero.subtitle'),
-    },
-    {
-      name: 'keywords',
-      content: 'AI image generation, digital art, AI art, image creation, MaxImages, artificial intelligence, creative tools',
-    },
-  ],
+      content: t('home.hero.subtitle')
+    }
+  ]
 })
 </script>
 
 <style scoped>
-.group:hover .absolute {
-  opacity: 1;
-  transform: translateY(0);
+.image-showcase {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  perspective: 1000px;
+  z-index: 10;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+.showcase-item {
+  position: absolute;
+  width: 320px;
+  height: 400px;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.showcase-item:hover {
+  transform: scale(1.05) translateY(-10px);
+  z-index: 20;
+}
+
+.showcase-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.showcase-item:hover img {
+  transform: scale(1.1);
+}
+
+.showcase-item .label {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  backdrop-filter: blur(4px);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.showcase-item:hover .label {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.item-1 {
+  transform: translateX(-50%) translateY(30%) rotate(-15deg);
+  z-index: 3;
+  animation: float1 6s ease-in-out infinite;
+}
+
+.item-2 {
+  transform: translateX(0%) translateY(40%);
+  z-index: 2;
+  animation: float2 7s ease-in-out infinite;
+}
+
+.item-3 {
+  transform: translateX(50%) translateY(50%) rotate(15deg);
+  z-index: 1;
+  animation: float3 8s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateX(-50%) translateY(30%) rotate(-15deg); }
+  50% { transform: translateX(-50%) translateY(25%) rotate(-12deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateX(0%) translateY(40%); }
+  50% { transform: translateX(0%) translateY(35%); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateX(50%) translateY(50%) rotate(15deg); }
+  50% { transform: translateX(50%) translateY(45%) rotate(12deg); }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 1s ease-out;
+}
+
+.animate-slide-in-delay {
+  animation: slideIn 1s ease-out 0.3s backwards;
+}
+
+.animate-slide-in-delay-2 {
+  animation: slideIn 1s ease-out 0.6s backwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradientShift 5s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
   }
   50% {
-    transform: translateY(-10px);
+    background-position: 100% 50%;
   }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>
