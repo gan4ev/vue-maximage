@@ -10,6 +10,11 @@ services:
       - "3000:80" # Map host port 3000 to container port 80
     environment:
       - NODE_ENV=production
+      - VITE_SUPABASE_URL=https://amrzaswumuizsnbybjdj.supabase.co
+      - VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtcnphc3d1bXVpenNuYnliamRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ2NTk5NjIsImV4cCI6MjA1MDIzNTk2Mn0.nDEIP-PNTEZ4nvcjs5inZMb1kW_tj5C57kJ5ySgLJv8
+      - VITE_CLERK_PUBLISHABLE_KEY=pk_test_ZW5nYWdpbmctc2xvdGgtNzIuY2xlcmsuYWNjb3VudHMuZGV2JA
+      - VITE_CLERK_SECRET_KEY=sk_test_siKKjvgAvvH68x9RejWnNjOwgUgzhiyCGl5OwTiyL1
+      - VITE_FAL_AI_KEY=c0991d00-3d5a-4a93-b6df-14cfe6675950:39b9dbe51b3d5a0fc57578e6b31529a0
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
