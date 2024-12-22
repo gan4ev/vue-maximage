@@ -10,7 +10,7 @@ const app = createApp(App)
 
 app.use(router)
 app.use(clerkPlugin, {
-    publishableKey: 'pk_test_ZW1pbmVudC1saW9uLTc4LmNsZXJrLmFjY291bnRzLmRldiQ',
+    publishableKey: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
 })
 app.use(i18n)
 

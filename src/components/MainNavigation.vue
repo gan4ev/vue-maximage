@@ -26,26 +26,20 @@
         <!-- Auth and CTA Buttons -->
         <div class="hidden md:flex items-center space-x-4">
           <LanguageSwitcher />
-          <SignInButton mode="modal">
-            <button class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors">
-              {{ $t('menu.signIn') }}
-            </button>
-          </SignInButton>
           
-          <SignOutButton>
+          <SignOutButton v-if="isSignedIn">
             <button class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors">
               {{ $t('menu.signOut') }}
             </button>
           </SignOutButton>
 
-          <RouterLink 
-            to="/dashboard"
-            class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
-                   text-white px-4 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/30 
-                   transition-all duration-200"
-          >
-            {{ $t('menu.startCreating') }}
-          </RouterLink>
+          <SignInButton v-if="!isSignedIn" mode="modal">
+            <button class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+                     text-white px-4 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/30 
+                     transition-all duration-200">
+              {{ $t('menu.startCreating') }}
+            </button>
+          </SignInButton>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -81,17 +75,17 @@
         </RouterLink>
       </div>
       <div class="px-4 py-3 border-t border-white/10">
-        <SignInButton mode="modal">
-          <button class="w-full text-left px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200">
-            {{ $t('menu.signIn') }}
-          </button>
-        </SignInButton>
-        
-        <SignOutButton>
+        <SignOutButton v-if="isSignedIn">
           <button class="w-full text-left px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200">
             {{ $t('menu.signOut') }}
           </button>
         </SignOutButton>
+        
+        <SignInButton v-if="!isSignedIn" mode="modal">
+          <button class="w-full text-left px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200">
+            {{ $t('menu.startCreating') }}
+          </button>
+        </SignInButton>
       </div>
     </div>
   </nav>
@@ -101,11 +95,12 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Icon } from '@iconify/vue'
-import { SignInButton, SignOutButton } from '@clerk/vue'
+import { SignInButton, SignOutButton, useAuth } from '@clerk/vue'
 import { useI18n } from 'vue-i18n'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 const { t } = useI18n()
+const { isSignedIn } = useAuth()
 
 const mobileMenuOpen = ref(false)
 
