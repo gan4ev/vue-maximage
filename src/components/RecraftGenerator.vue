@@ -132,24 +132,21 @@ const styleOptions = ref([
   { value: 'realistic_image/b_and_w', label: 'Realistic - Black & White' },
   { value: 'realistic_image/hard_flash', label: 'Realistic - Hard Flash' },
   { value: 'realistic_image/hdr', label: 'Realistic - HDR' },
-  { value: 'realistic_image/natural_light', label: 'Realistic - Natural Light' },
-  { value: 'realistic_image/studio_portrait', label: 'Realistic - Studio Portrait' },
-  { value: 'realistic_image/enterprise', label: 'Realistic - Enterprise' },
-  { value: 'realistic_image/motion_blur', label: 'Realistic - Motion Blur' },
+  { value: 'realistic_image/long_exposure', label: 'Realistic - Long Exposure' },
+  { value: 'realistic_image/macro', label: 'Realistic - Macro' },
+  { value: 'digital_illustration', label: 'Digital Illustration' },
   { value: 'digital_illustration/pixel_art', label: 'Digital - Pixel Art' },
   { value: 'digital_illustration/hand_drawn', label: 'Digital - Hand Drawn' },
   { value: 'digital_illustration/grain', label: 'Digital - Grain' },
-  { value: 'digital_illustration', label: 'Digital Ilustraion' },
   { value: 'digital_illustration/infantile_sketch', label: 'Digital - Infantile Sketch' },
   { value: 'digital_illustration/2d_art_poster', label: 'Digital - 2D Art Poster' },
   { value: 'digital_illustration/handmade_3d', label: 'Digital - Handmade 3D' },
-  { value: 'digital_illustration/hand_drawn_outline', label: 'Digital - Hand Drawn Outline' },
-  { value: 'digital_illustration/engraving_color', label: 'Digital - Engraving Color' },
-  { value: 'digital_illustration/2d_art_poster_2', label: 'Digital - 2D Art Poster 2' },
-  { value: 'vector_illustration/engraving', label: 'Vector - Engraving' },
+  { value: 'vector_illustration', label: 'Vector Illustration' },
+  { value: 'vector_illustration/flat', label: 'Vector - Flat' },
+  { value: 'vector_illustration/isometric', label: 'Vector - Isometric' },
   { value: 'vector_illustration/line_art', label: 'Vector - Line Art' },
-  { value: 'vector_illustration/line_circuit', label: 'Vector - Line Circuit' },
-  { value: 'vector_illustration/linocut', label: 'Vector - Linocut' }
+  { value: 'vector_illustration/low_poly', label: 'Vector - Low Poly' },
+  { value: 'vector_illustration/geometric', label: 'Vector - Geometric' }
 ])
 
 // Image size options

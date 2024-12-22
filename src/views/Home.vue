@@ -1,11 +1,11 @@
 <template>
   <div class="h-screen bg-[#0D0D0F] flex flex-col overflow-hidden">
-    <MainNavigation />
-    <main class="flex-1 flex items-center">
+    <MainNavigation class="z-50 relative" />
+    <main class="flex-1 flex items-center relative">
       <!-- Hero Section -->
       <div class="mx-auto max-w-7xl px-6 w-full grid grid-cols-2 gap-12 relative">
         <!-- Left Content -->
-        <div class="flex flex-col justify-center relative z-50">
+        <div class="flex flex-col justify-center relative z-30">
           <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-slide-in">
             {{ $t('home.hero.title') }}
             <span class="block mt-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient">
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Right Image Showcase -->
-        <div class="relative flex items-end justify-center pb-20 z-10">
+        <div class="relative flex items-start justify-center pt-20 translate-x-20">
           <!-- Floating Images -->
           <div class="image-showcase">
             <div class="showcase-item item-1">
@@ -102,10 +102,12 @@ useHead({
 <style scoped>
 .image-showcase {
   position: relative;
-  width: 600px;
-  height: 600px;
-  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+  margin-top: 60px; /* Reduced margin to move images more up */
   z-index: 10;
+  perspective: 1000px;
+  overflow: visible;
 }
 
 .showcase-item {
@@ -155,36 +157,39 @@ useHead({
 }
 
 .item-1 {
-  transform: translateX(-50%) translateY(30%) rotate(-15deg);
+  top: -40px;  /* Moved higher up */
+  left: 0;
   z-index: 3;
   animation: float1 6s ease-in-out infinite;
 }
 
 .item-2 {
-  transform: translateX(0%) translateY(40%);
+  top: 60px;
+  left: 60px;
   z-index: 2;
   animation: float2 7s ease-in-out infinite;
 }
 
 .item-3 {
-  transform: translateX(50%) translateY(50%) rotate(15deg);
+  top: 120px;
+  left: 120px;
   z-index: 1;
   animation: float3 8s ease-in-out infinite;
 }
 
 @keyframes float1 {
-  0%, 100% { transform: translateX(-50%) translateY(30%) rotate(-15deg); }
-  50% { transform: translateX(-50%) translateY(25%) rotate(-12deg); }
+  0%, 100% { transform: translateX(-40%) translateY(-20%) rotate(-15deg); }
+  50% { transform: translateX(-40%) translateY(-25%) rotate(-12deg); }
 }
 
 @keyframes float2 {
-  0%, 100% { transform: translateX(0%) translateY(40%); }
-  50% { transform: translateX(0%) translateY(35%); }
+  0%, 100% { transform: translateX(10%) translateY(-10%); }
+  50% { transform: translateX(10%) translateY(-15%); }
 }
 
 @keyframes float3 {
-  0%, 100% { transform: translateX(50%) translateY(50%) rotate(15deg); }
-  50% { transform: translateX(50%) translateY(45%) rotate(12deg); }
+  0%, 100% { transform: translateX(60%) translateY(0%) rotate(15deg); }
+  50% { transform: translateX(60%) translateY(-5%) rotate(12deg); }
 }
 
 .animate-blob {

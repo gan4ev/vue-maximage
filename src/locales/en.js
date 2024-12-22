@@ -23,17 +23,22 @@ export default {
     subtitle: 'Discover the power of AI image generation',
     features: {
       aiPowered: {
-        title: 'AI Powered',
-        description: 'State-of-the-art AI models for image generation'
+        title: 'Assist',
+        description: 'Experience the power of AI in English. Our intuitive interface and advanced features make creating stunning images a breeze.'
       },
       easyToUse: {
-        title: 'Easy to Use',
-        description: 'Intuitive interface for all users'
+        title: 'Български',
+        description: 'Explore AI art generation in Bulgarian. Perfect for our Bulgarian-speaking community with full native language support.'
       },
       fast: {
-        title: 'Fast Generation',
-        description: 'Get your images in seconds'
+        title: 'Русский',
+        description: 'Create amazing AI art in Russian. Complete feature set available with Russian language interface and support.'
       }
+    },
+    languages: {
+      english: 'Experience the power of AI in English. Our intuitive interface and advanced features make creating stunning images a breeze.',
+      bulgarian: 'Explore AI art generation in Bulgarian. Perfect for our Bulgarian-speaking community with full native language support.',
+      russian: 'Create amazing AI art in Russian. Complete feature set available with Russian language interface and support.'
     }
   },
   pricing: {
@@ -84,12 +89,23 @@ export default {
   },
   contact: {
     title: 'Contact Us',
-    subtitle: 'Get in touch with us',
+    subtitle: 'Have a question or feedback? We\'d love to hear from you.',
     form: {
       name: 'Name',
       email: 'Email',
+      subject: 'Subject',
       message: 'Message',
-      send: 'Send'
+      namePlaceholder: 'Enter your name',
+      emailPlaceholder: 'Enter your email',
+      subjectPlaceholder: 'What\'s this about?',
+      messagePlaceholder: 'Your message here...',
+      send: 'Send Message',
+      sending: 'Sending...',
+      nameRequired: 'Name is required',
+      emailRequired: 'Email is required',
+      emailInvalid: 'Please enter a valid email',
+      messageRequired: 'Message is required',
+      successMessage: 'Thank you! Your message has been sent successfully.'
     }
   },
   dashboard: {

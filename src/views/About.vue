@@ -8,17 +8,11 @@
             <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               {{ $t('about.title') }}
             </h2>
-            <p class="mt-6 text-lg leading-8 text-gray-300">
-              {{ $t('about.subtitle') }}
-            </p>
           </div>
 
           <!-- Mission Section -->
           <div class="mt-16 sm:mt-20">
             <div class="lg:text-center">
-              <h3 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                {{ $t('about.mission.title') }}
-              </h3>
               <p class="mt-6 text-lg leading-8 text-gray-300">
                 {{ $t('about.mission.description') }}
               </p>

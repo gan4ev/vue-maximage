@@ -55,9 +55,25 @@
                 <span class="text-4xl font-bold tracking-tight text-white">{{ $t('pricing.plans.free.price') }}</span>
               </p>
               <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-300">
-                <li v-for="feature in $t('pricing.plans.free.features')" :key="feature" class="flex gap-x-3">
+                <li class="flex gap-x-3">
                   <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
-                  {{ feature }}
+                  <p class="leading-6">До 50 генерации месечно</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Основни AI модели</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">HD качество (1080p)</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Стандартна поддръжка</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Без воден знак</p>
                 </li>
               </ul>
               <RouterLink
@@ -88,14 +104,34 @@
                 {{ $t('pricing.yearlyDiscount') }}
               </div>
               <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-300">
-                <li v-for="feature in $t('pricing.plans.pro.features')" :key="feature" class="flex gap-x-3">
+                <li class="flex gap-x-3">
                   <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
-                  {{ feature }}
+                  <p class="leading-6">Неограничени генерации</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Достъп до всички AI модели</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">4K Ultra HD качество</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Приоритетна поддръжка 24/7</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Експорт без воден знак</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Персонализирани настройки</p>
                 </li>
               </ul>
               <RouterLink
                 to="/dashboard"
-                class="mt-8 block rounded-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-3 py-2 text-center text-sm font-semibold leading-6 text-white hover:shadow-lg hover:shadow-purple-500/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-500"
+                class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200"
               >
                 {{ $t('pricing.startTrial') }}
               </RouterLink>
@@ -113,9 +149,29 @@
                 <span class="text-4xl font-bold tracking-tight text-white">{{ $t('pricing.plans.enterprise.price') }}</span>
               </p>
               <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-300">
-                <li v-for="feature in $t('pricing.plans.enterprise.features')" :key="feature" class="flex gap-x-3">
+                <li class="flex gap-x-3">
                   <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
-                  {{ feature }}
+                  <p class="leading-6">Всички PRO функции</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Персонализирани AI модели</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Пълен API достъп</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Персонален мениджър</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">SLA договор</p>
+                </li>
+                <li class="flex gap-x-3">
+                  <Icon icon="heroicons:check" class="h-6 w-5 flex-none text-purple-400" aria-hidden="true" />
+                  <p class="leading-6">Индивидуални решения</p>
                 </li>
               </ul>
               <RouterLink
@@ -141,3 +197,13 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const billing = ref('monthly')
 </script>
+
+<style scoped>
+.pricing-card {
+  transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+}
+</style>
