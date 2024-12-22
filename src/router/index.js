@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuth } from '@clerk/vue'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
+import Features from '../views/Features.vue'
+import Pricing from '../views/Pricing.vue'
+import Contact from '../views/Contact.vue'
 import Dashboard from '../views/Dashboard.vue'
 
 const routes = [
@@ -11,9 +14,24 @@ const routes = [
     component: Home
   },
   {
+    path: '/features',
+    name: 'Features',
+    component: Features
+  },
+  {
+    path: '/pricing',
+    name: 'Pricing',
+    component: Pricing
+  },
+  {
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
   },
   {
     path: '/dashboard',

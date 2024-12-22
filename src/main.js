@@ -4,12 +4,14 @@ import App from './App.vue'
 import router from './router'
 import './style.css'
 import 'flowbite'
+import i18n from './i18n'
 
 const app = createApp(App)
 
-app.use(clerkPlugin, {
-  publishableKey: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-})
-
 app.use(router)
+app.use(clerkPlugin, {
+    publishableKey: 'pk_test_ZW1pbmVudC1saW9uLTc4LmNsZXJrLmFjY291bnRzLmRldiQ',
+})
+app.use(i18n)
+
 app.mount('#app')
