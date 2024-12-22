@@ -15,12 +15,6 @@
              class="text-base font-medium text-white hover:text-purple-400 transition-colors duration-200">
             {{ $t(`menu.${item.name.toLowerCase()}`) }}
           </RouterLink>
-          <RouterLink
-            to="/dashboard"
-            class="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors"
-          >
-            {{ $t('menu.dashboard') }}
-          </RouterLink>
         </div>
 
         <!-- Auth and CTA Buttons -->
@@ -66,12 +60,6 @@
           class="block px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200"
         >
           {{ $t(`menu.${item.name.toLowerCase()}`) }}
-        </RouterLink>
-        <RouterLink
-          to="/dashboard"
-          class="block px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200"
-        >
-          {{ $t('menu.dashboard') }}
         </RouterLink>
       </div>
       <div class="px-4 py-3 border-t border-white/10">
