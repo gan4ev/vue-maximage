@@ -21,7 +21,16 @@
           </div>
 
           <!-- CTA Button -->
-          <div>
+          <div class="flex items-center space-x-4">
+            <SignInButton v-if="!isSignedIn" mode="modal" class="bg-white/10 hover:bg-white/20 
+                             text-white px-6 py-2.5 rounded-full text-sm font-medium
+                             transition-all duration-200">
+              Sign In
+            </SignInButton>
+            <SignOutButton v-else class="bg-white/10 hover:bg-white/20 
+                             text-white px-6 py-2.5 rounded-full text-sm font-medium
+                             transition-all duration-200" />
+            
             <RouterLink to="/dashboard" 
                       class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
                              text-white px-6 py-2.5 rounded-full text-sm font-medium
@@ -143,7 +152,10 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { Icon } from '@iconify/vue'
+import { SignInButton, SignOutButton, useAuth } from '@clerk/vue'
 import HeroBg from '../assets/hero-bg.jpg'
+
+const { isSignedIn } = useAuth()
 
 const menuItems = [
   { name: 'Home', href: '/' },
