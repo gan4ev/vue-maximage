@@ -19,9 +19,8 @@ lifeCycle:
     docker-compose up -d
   postStart: |
     sleep 5
-  stop: |
-    docker-compose down
-  
+    curl -f http://localhost:3000 || exit 1
+
 webUI:
   - url: "http://[CI_CD_DOMAIN]:3000"
     label: "Web App"
