@@ -11,6 +11,8 @@ const app = createApp(App)
 app.use(router)
 app.use(clerkPlugin, {
     publishableKey: import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
+    afterSignInUrl: '/dashboard',
+    afterSignUpUrl: '/dashboard',
 })
 app.use(i18n)
 

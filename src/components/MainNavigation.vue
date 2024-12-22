@@ -27,13 +27,24 @@
             </button>
           </SignOutButton>
 
-          <SignInButton v-if="!isSignedIn" mode="modal">
-            <button class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+          <template v-if="isSignedIn">
+            <RouterLink 
+              to="/dashboard"
+              class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
                      text-white px-4 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/30 
                      transition-all duration-200">
               {{ $t('menu.startCreating') }}
-            </button>
-          </SignInButton>
+            </RouterLink>
+          </template>
+          <template v-else>
+            <SignInButton mode="modal">
+              <button class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+                       text-white px-4 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/30 
+                       transition-all duration-200">
+                {{ $t('menu.startCreating') }}
+              </button>
+            </SignInButton>
+          </template>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -69,11 +80,20 @@
           </button>
         </SignOutButton>
         
-        <SignInButton v-if="!isSignedIn" mode="modal">
-          <button class="w-full text-left px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200">
+        <template v-if="isSignedIn">
+          <RouterLink 
+            to="/dashboard"
+            class="block w-full text-left px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200">
             {{ $t('menu.startCreating') }}
-          </button>
-        </SignInButton>
+          </RouterLink>
+        </template>
+        <template v-else>
+          <SignInButton mode="modal">
+            <button class="w-full text-left px-3 py-2 text-base font-medium text-white hover:text-purple-400 transition-colors duration-200">
+              {{ $t('menu.startCreating') }}
+            </button>
+          </SignInButton>
+        </template>
       </div>
     </div>
   </nav>
