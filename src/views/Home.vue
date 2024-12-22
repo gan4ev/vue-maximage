@@ -142,8 +142,24 @@ import MainNavigation from '../components/MainNavigation.vue'
 import { Icon } from '@iconify/vue'
 import { useI18n } from 'vue-i18n'
 import HeroBg from '../assets/hero-bg.jpg'
+import { useHead } from '@vueuse/head'
 
 const { t } = useI18n()
+
+// SEO configuration
+useHead({
+  title: t('home.hero.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('home.hero.subtitle'),
+    },
+    {
+      name: 'keywords',
+      content: 'AI image generation, digital art, AI art, image creation, MaxImages, artificial intelligence, creative tools',
+    },
+  ],
+})
 </script>
 
 <style scoped>
