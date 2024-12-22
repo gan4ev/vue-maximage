@@ -2,7 +2,7 @@ config:
   runTime: "docker"
   version: "1.0"
   ports:
-    - "80:80"
+    - "3000:80"
   volumes:
     - "./:/app"
 
@@ -23,5 +23,5 @@ lifeCycle:
     docker-compose down
   
 webUI:
-  - url: "http://[CI_CD_DOMAIN]"
+  - url: "http://[CI_CD_DOMAIN]:3000"
     label: "Web App"
