@@ -3,13 +3,14 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
-    "./node_modules/flowbite/**/*.js"
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'spin-reverse': 'spin-reverse 1s linear infinite',
+      },
+    },
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
+  plugins: [],
 }

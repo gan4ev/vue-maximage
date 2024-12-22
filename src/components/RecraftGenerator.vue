@@ -95,14 +95,7 @@
                    disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-blue-500 disabled:hover:to-indigo-500
                    transition-all duration-200"
           >
-            <div class="flex items-center justify-center">
-              <Icon
-                v-if="isGenerating"
-                icon="heroicons:arrow-path"
-                class="w-5 h-5 mr-2 animate-spin"
-              />
-              <span>{{ isGenerating ? 'Generating...' : 'Generate Image' }}</span>
-            </div>
+            <span>{{ isGenerating ? 'Generating...' : 'Generate Image' }}</span>
           </button>
 
           <!-- Error Message -->
@@ -114,8 +107,24 @@
 
       <!-- Right Panel: Preview -->
       <div class="w-full lg:w-2/3 p-6">
-        <div v-if="generatedImage" class="space-y-6">
-          <!-- Image Preview -->
+        <!-- Loading State -->
+        <div 
+          v-if="isGenerating" 
+          class="h-[600px] flex items-center justify-center bg-gray-50 dark:bg-gray-900 rounded-lg"
+        >
+          <div class="text-center">
+            <div class="relative w-32 h-32">
+              <div class="absolute inset-0 rounded-full border-t-2 border-b-2 border-blue-500 animate-spin"></div>
+              <div class="absolute inset-4 rounded-full border-t-2 border-b-2 border-indigo-500 animate-spin-reverse"></div>
+              <div class="absolute inset-8 rounded-full border-t-2 border-b-2 border-purple-500 animate-spin"></div>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 mt-4">Creating your masterpiece...</p>
+            <p class="text-sm text-gray-500 mt-2">This may take a few moments</p>
+          </div>
+        </div>
+
+        <!-- Generated Image -->
+        <div v-else-if="generatedImage" class="space-y-6">
           <div class="relative aspect-square">
             <img
               :src="generatedImage"
@@ -123,8 +132,6 @@
               class="w-full h-full object-contain rounded-lg shadow-lg"
             />
           </div>
-
-          <!-- Action Buttons -->
           <div class="flex justify-end space-x-4">
             <button
               @click="downloadImage"
@@ -152,7 +159,7 @@
         <!-- Empty State -->
         <div
           v-else
-          class="h-full flex items-center justify-center text-gray-400 dark:text-gray-600"
+          class="h-[600px] flex items-center justify-center bg-gray-50 dark:bg-gray-900 rounded-lg text-gray-400 dark:text-gray-600"
         >
           <div class="text-center">
             <Icon icon="heroicons:photo" class="w-16 h-16 mx-auto mb-4" />
